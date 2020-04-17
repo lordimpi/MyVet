@@ -19,9 +19,11 @@ namespace MyVet.Web.Controllers
         }
 
         // GET: Owners
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            return View(await _context.Owners.ToListAsync());
+            return View(_context.Owners
+                .Include(ow => ow.User)
+                .Include(ow => ow.Pets));
         }
 
         // GET: Owners/Details/5
