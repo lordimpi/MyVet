@@ -11,6 +11,7 @@ namespace MyVet.Prism.ViewModels
 {
     public class LoginPageViewModel : ViewModelBase
     {
+        private readonly INavigationService _navigationService;
         private readonly IApiService _apiService;
         private string _password;
         private bool _isRunning;
@@ -20,7 +21,8 @@ namespace MyVet.Prism.ViewModels
         public LoginPageViewModel(
             INavigationService navigationService,
             IApiService apiService) : base(navigationService)
-        {            
+        {
+            _navigationService = navigationService;
             _apiService = apiService;
             Title = "Login";
             IsEnabled = true;
@@ -84,7 +86,7 @@ namespace MyVet.Prism.ViewModels
 
             var token = (TokenResponse)response.Result;
 
-            var response2 = await _apiService.GetOwnerByEmail(
+            var response2 = await _apiService.GetOwnerByEmailAsync(
                 url,
                 "/api",
                 "/Owners/GetOwnerByEmail",
@@ -93,11 +95,18 @@ namespace MyVet.Prism.ViewModels
                 Email);
 
             var owner = (OwnerResponse)response2.Result;
+            var paramaters = new NavigationParameters
+            {
+                {"owner", owner }
+            };
+
 
             IsEnabled = true;
             IsRunning = false;
 
-            await App.Current.MainPage.DisplayAlert("Ok", "We are making progress!", "Accept");
+            await _navigationService.NavigateAsync("PetsPage", paramaters);
+            Password = string.Empty;
+
         }
 
     }
