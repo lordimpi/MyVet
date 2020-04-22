@@ -14,7 +14,8 @@ namespace MyVet.Prism.ViewModels
             _navigationService = navigationService;
         }
 
-        public DelegateCommand SelectHistoryCommand => _selectHistoryCommand ?? (_selectHistoryCommand = new DelegateCommand(SelectHistory));
+        public DelegateCommand SelectHistoryCommand => _selectHistoryCommand ?? (_selectHistoryCommand = 
+            new DelegateCommand(SelectHistory));
 
         private async void SelectHistory()
         {

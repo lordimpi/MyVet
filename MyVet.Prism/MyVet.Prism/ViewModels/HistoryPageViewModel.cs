@@ -29,4 +29,3 @@ namespace MyVet.Prism.ViewModels
         }
     }
 }
-
