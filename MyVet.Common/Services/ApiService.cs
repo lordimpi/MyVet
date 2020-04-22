@@ -5,11 +5,22 @@ using System.Text;
 using System.Threading.Tasks;
 using MyVet.Common.Models;
 using Newtonsoft.Json;
+using Plugin.Connectivity;
 
 namespace MyVet.Common.Services
 {
     public class ApiService : IApiService
     {
+        public async Task<bool> CheckConnection(string url)
+        {
+            if (!CrossConnectivity.Current.IsConnected)
+            {
+                return false;
+            }
+
+            return await CrossConnectivity.Current.IsRemoteReachable(url);
+        }
+
         public async Task<Response<TokenResponse>> GetTokenAsync(
             string urlBase,
             string servicePrefix,

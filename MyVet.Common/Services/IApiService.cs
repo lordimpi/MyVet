@@ -18,5 +18,8 @@ namespace MyVet.Common.Services
             string servicePrefix,
             string controller,
             TokenRequest request);
+
+        Task<bool> CheckConnection(string url);
+
     }
 }
