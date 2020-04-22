@@ -1,19 +1,20 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.Linq;
+using MyVet.Common.Helpers;
 using MyVet.Common.Models;
+using Newtonsoft.Json;
 using Prism.Navigation;
 
 namespace MyVet.Prism.ViewModels
 {
     public class PetPageViewModel : ViewModelBase
     {
-        private readonly INavigationService _navigationService;
         private PetResponse _pet;
-        private ObservableCollection<HistoryItemViewModel> _histories;
 
         public PetPageViewModel(INavigationService navigationService) : base(navigationService)
         {
-            _navigationService = navigationService;
+            Title = "Details";
         }
 
         public PetResponse Pet
@@ -22,30 +23,10 @@ namespace MyVet.Prism.ViewModels
             set => SetProperty(ref _pet, value);
         }
 
-        public ObservableCollection<HistoryItemViewModel> Histories
-        {
-            get => _histories;
-            set => SetProperty(ref _histories, value);
-        }
-
         public override void OnNavigatedTo(INavigationParameters parameters)
         {
             base.OnNavigatedTo(parameters);
-
-            if (parameters.ContainsKey("pet"))
-            {
-                Pet = parameters.GetValue<PetResponse>("pet");
-                Title = Pet.Name;
-                Histories = new ObservableCollection<HistoryItemViewModel>(Pet.Histories.Select(
-                    h => new HistoryItemViewModel(_navigationService)
-                {
-                    Date = h.Date,
-                    Description = h.Description,
-                    Id = h.Id,
-                    Remarks = h.Remarks,
-                    ServiceType = h.ServiceType
-                }).ToList());
-            }
+            Pet = JsonConvert.DeserializeObject<PetResponse>(Settings.Pet);
         }
     }
 }

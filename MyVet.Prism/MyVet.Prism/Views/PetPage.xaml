@@ -5,6 +5,7 @@
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="MyVet.Prism.Views.PetPage"
              BackgroundColor="Silver"
+             IconImageSource="ic_pets"
              Title="{Binding Title}">
 
     <ScrollView>
@@ -37,11 +38,6 @@
                 	Text="{Binding Pet.Remarks}"/>
                 </StackLayout>
             </Frame>
-            <Label
-        	FontAttributes="Bold"
-        	FontSize="Large"
-        	Text="History"
-        	TextColor="Black"/>
             <ListView
         	HasUnevenRows="True"
         	IsRefreshing="{Binding IsRefreshing}"

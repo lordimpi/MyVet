@@ -31,6 +31,7 @@ namespace MyVet.Prism
             containerRegistry.RegisterForNavigation<PetPage, PetPageViewModel>();
             containerRegistry.RegisterForNavigation<HistoryPage, HistoryPageViewModel>();
             containerRegistry.RegisterForNavigation<HistoriesPage, HistoriesPageViewModel>();
+            containerRegistry.RegisterForNavigation<PetTabbedPage, PetTabbedPageViewModel>();
         }
     }
 }

@@ -45,7 +45,8 @@ namespace MyVet.Prism.ViewModels
             {
                 _owner = parameters.GetValue<OwnerResponse>("owner");
                 Title = $"Pets of: {_owner.FullName}";
-                Pets = new ObservableCollection<PetItemViewModel>(_owner.Pets.Select(p => new PetItemViewModel(_navigationService)
+                Pets = new ObservableCollection<PetItemViewModel>(_owner.Pets
+                    .Select(p => new PetItemViewModel(_navigationService)
                 {
                     Born = p.Born,
                     Histories = p.Histories,

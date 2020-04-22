@@ -1,11 +1,7 @@
 ﻿using MyVet.Common.Models;
 using MyVet.Common.Services;
 using Prism.Commands;
-using Prism.Mvvm;
 using Prism.Navigation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace MyVet.Prism.ViewModels
 {
@@ -29,7 +25,7 @@ namespace MyVet.Prism.ViewModels
         }
 
         public DelegateCommand LoginCommand => _loginCommand ?? (_loginCommand = new DelegateCommand(Login));
-        
+
         public string Email { get; set; }
 
         public string Password
