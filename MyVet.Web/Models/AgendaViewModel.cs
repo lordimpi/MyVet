@@ -12,7 +12,6 @@ namespace MyVet.Web.Models
         [Range(1, int.MaxValue, ErrorMessage = "You must select an owner.")]
         public int OwnerId { get; set; }
 
-
         public IEnumerable<SelectListItem> Owners { get; set; }
 
         [Required(ErrorMessage = "The field {0} is mandatory.")]
@@ -21,5 +20,10 @@ namespace MyVet.Web.Models
         public int PetId { get; set; }
 
         public IEnumerable<SelectListItem> Pets { get; set; }
+
+        public bool IsMine { get; set; }
+
+        public string Reserved => "Reserved";
+
     }
 }
