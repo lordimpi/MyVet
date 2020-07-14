@@ -93,7 +93,7 @@ namespace MyVet.Web.Controllers.API
 
         [HttpPost]
         [Route("RecoverPassword")]
-        public async Task<IActionResult> RecoverPassword([FromBody] EmailRequest request)
+        public async Task<IActionResult> RecoverPasswordAPI([FromBody] EmailRequest request)
         {
             if (!ModelState.IsValid)
             {
@@ -156,6 +156,47 @@ namespace MyVet.Web.Controllers.API
 
             var updatedUser = await _userHelper.GetUserByEmailAsync(request.Email);
             return Ok(updatedUser);
+        }
+
+        [HttpPost]
+        [Route("ChangePassword")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        public async Task<IActionResult> ChangePasswordAPI([FromBody] ChangePasswordRequest request)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(new Response<object>
+                {
+                    IsSuccess = false,
+                    Message = "Bad request"
+                });
+            }
+
+            var user = await _userHelper.GetUserByEmailAsync(request.Email);
+            if (user == null)
+            {
+                return BadRequest(new Response<object>
+                {
+                    IsSuccess = false,
+                    Message = "This email is not assigned to any user."
+                });
+            }
+
+            var result = await _userHelper.ChangePasswordAsync(user, request.OldPassword, request.NewPassword);
+            if (!result.Succeeded)
+            {
+                return BadRequest(new Response<object>
+                {
+                    IsSuccess = false,
+                    Message = result.Errors.FirstOrDefault().Description
+                });
+            }
+
+            return Ok(new Response<object>
+            {
+                IsSuccess = true,
+                Message = "The password was changed successfully!"
+            });
         }
 
     }
