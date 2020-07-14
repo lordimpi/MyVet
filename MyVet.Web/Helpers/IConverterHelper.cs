@@ -1,4 +1,5 @@
-﻿using MyVet.Web.Data.Entities;
+﻿using MyVet.Common.Models;
+using MyVet.Web.Data.Entities;
 using MyVet.Web.Models;
 using System.Threading.Tasks;
 
@@ -14,5 +15,8 @@ namespace MyVet.Web.Helpers
 
         HistoryViewModel ToHistoryViewModel(History history);
 
+        PetResponse ToPetResponse(Pet pet);
+
+        OwnerResponse ToOwnerResponse(Owner owner);
     }
 }
