@@ -8,7 +8,7 @@
 		<!-- Application resource dictionary -->
         <ResourceDictionary>
             <!-- Parameters -->
-            <x:String x:Key="UrlAPI">https://myvetwebsite.azurewebsites.net</x:String>
+            <x:String x:Key="UrlAPI">https://myveterinary.azurewebsites.net/</x:String>
 
         </ResourceDictionary>
     </Application.Resources>

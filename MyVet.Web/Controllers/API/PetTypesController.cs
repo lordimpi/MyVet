@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using MyVet.Web.Data;
 using MyVet.Web.Data.Entities;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace MyVet.Web.Controllers.API
 {
@@ -12,17 +13,17 @@ namespace MyVet.Web.Controllers.API
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class PetTypesController : ControllerBase
     {
-        private readonly DataContext _context;
+        private readonly DataContext _datacontext;
 
-        public PetTypesController(DataContext context)
+        public PetTypesController(DataContext datacontext)
         {
-            _context = context;
+            _datacontext = datacontext;
         }
 
         [HttpGet]
         public IEnumerable<PetType> GetPetTypes()
         {
-            return _context.PetTypes;
+            return _datacontext.PetTypes.OrderBy(pt => pt.Name);
         }
     }
 }
