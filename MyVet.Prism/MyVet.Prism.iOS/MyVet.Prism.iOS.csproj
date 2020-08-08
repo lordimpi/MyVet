@@ -231,5 +231,8 @@
   <ItemGroup>
     <BundleResource Include="Resources\ic_pets_menu.png" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\vet_splash.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>

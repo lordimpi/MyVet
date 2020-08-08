@@ -7,7 +7,7 @@ namespace MyVet.Prism.ViewModels
     {
         public ProfilePageViewModel(INavigationService navigationService) : base(navigationService)
         {
-            Title = "Map";
+            Title = "Profile";
         }
     }
 }
